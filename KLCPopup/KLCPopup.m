@@ -102,6 +102,8 @@ const KLCPopupLayout KLCPopupLayoutCenter = { KLCPopupHorizontalLayoutCenter, KL
     self.dismissType = KLCPopupDismissTypeShrinkOut;
     self.maskType = KLCPopupMaskTypeDimmed;
     self.dimmedMaskAlpha = 0.5;
+      
+    self.tapInside = nil;
     
     _isBeingShown = NO;
     _isShowing = NO;
@@ -154,6 +156,10 @@ const KLCPopupLayout KLCPopupLayoutCenter = { KLCPopupHorizontalLayoutCenter, KL
     
     // If view is within containerView and contentTouch flag set, then try to hide.
     if ([hitView isDescendantOfView:_containerView]) {
+        if (self.tapInside != nil)
+        {
+            self.tapInside();
+        }
       if (_shouldDismissOnContentTouch) {
         [self dismiss:YES];
       }
